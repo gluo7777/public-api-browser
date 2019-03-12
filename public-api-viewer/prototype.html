@@ -30,6 +30,22 @@
             justify-content: flex-start;
             align-content: center;
         }
+
+        header>h1 {
+            text-align: center;
+        }
+
+        #search-pane.v-pane {
+            width: 50%;
+        }
+
+        #control-pane.v-pane {
+            width: 50%;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
     </style>
 </head>
 
@@ -39,14 +55,66 @@
     </header>
     <main class=".container-fluid h-pane">
         <div id="search-pane" class="v-pane">
-            <div class="input-group mb-3">
+            <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="search-text">Search</span>
                 </div>
-                <input type="text" class="form-control" placeholder="text" id="search-text">
+                <input type="text" class="form-control" placeholder="justo" id="search-text">
+            </div>
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><Strong>API #1</Strong> Cras <span class="highlight">justo</span> odio
+                    </li>
+                    <li class="list-group-item"><Strong>API #2</Strong> Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><Strong>API #3</Strong> Vestibulum at eros <span
+                            class="highlight">justo</span></li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a href="#" class="btn btn-primary">Back</a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">API Name</h5>
+                    <p class="card-text">API Description</p>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>HTTPS</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>CORS</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>Authentication</td>
+                                <td>OAuth2.0</td>
+                            </tr>
+                            <tr>
+                                <td>Link</td>
+                                <td><a href="https://www.google.com">https://www.google.com</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div id="control-pane" class="v-pane">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
             <form>
                 <div class="form-group">
                     <div class="form-check form-check-inline">
@@ -81,7 +149,7 @@
             </form>
         </div>
     </main>
-    <footer>
+    <footer style="display: flex; justify-content: center;">
         <a href="http://github.com/gluo7777/public-api-browser">GitHub</a>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
