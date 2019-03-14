@@ -46,6 +46,15 @@
         .highlight {
             background-color: yellow;
         }
+
+        .scroll-pane {
+            height: 80vh;
+            overflow-y: scroll;
+        }
+
+        .results {
+            height: 50%;
+        }
     </style>
 </head>
 
@@ -61,8 +70,33 @@
                 </div>
                 <input type="text" class="form-control" placeholder="justo" id="search-text">
             </div>
-            <div class="card">
-                <ul class="list-group list-group-flush">
+            <div id="results" class="card">
+                <ul class="list-group list-group-flush scroll-pane">
+                    <li class="list-group-item"><Strong>API #1</Strong> Cras <span class="highlight">justo</span> odio
+                    </li>
+                    <li class="list-group-item"><Strong>API #2</Strong> Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><Strong>API #3</Strong> Vestibulum at eros <span
+                            class="highlight">justo</span></li>
+                    <li class="list-group-item"><Strong>API #1</Strong> Cras <span class="highlight">justo</span> odio
+                    </li>
+                    <li class="list-group-item"><Strong>API #2</Strong> Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><Strong>API #3</Strong> Vestibulum at eros <span
+                            class="highlight">justo</span></li>
+                    <li class="list-group-item"><Strong>API #1</Strong> Cras <span class="highlight">justo</span> odio
+                    </li>
+                    <li class="list-group-item"><Strong>API #2</Strong> Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><Strong>API #3</Strong> Vestibulum at eros <span
+                            class="highlight">justo</span></li>
+                    <li class="list-group-item"><Strong>API #1</Strong> Cras <span class="highlight">justo</span> odio
+                    </li>
+                    <li class="list-group-item"><Strong>API #2</Strong> Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><Strong>API #3</Strong> Vestibulum at eros <span
+                            class="highlight">justo</span></li>
+                    <li class="list-group-item"><Strong>API #1</Strong> Cras <span class="highlight">justo</span> odio
+                    </li>
+                    <li class="list-group-item"><Strong>API #2</Strong> Dapibus ac facilisis in</li>
+                    <li class="list-group-item"><Strong>API #3</Strong> Vestibulum at eros <span
+                            class="highlight">justo</span></li>
                     <li class="list-group-item"><Strong>API #1</Strong> Cras <span class="highlight">justo</span> odio
                     </li>
                     <li class="list-group-item"><Strong>API #2</Strong> Dapibus ac facilisis in</li>
@@ -103,16 +137,10 @@
         <div id="control-pane" class="v-pane">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
+                    <a class="nav-link active" href="#">Filter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="#">Setting</a>
                 </li>
             </ul>
             <form>
@@ -129,10 +157,9 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control custom-select">
-                        <option selected>No Authentication</option>
-                        <option value="basic">Basic</option>
-                        <option value="api-key">API Key</option>
-                        <option value="oauth-2.0">OAuth 2.0</option>
+                        <option value="" selected>No Authentication</option>
+                        <option value="apikey">API Key</option>
+                        <option value="oauth">OAuth</option>
                     </select>
                     <small class="form-text text-muted">What type of authentication is required?</small>
                 </div>
@@ -143,7 +170,7 @@
                         </div>
                         <input type="text" class="form-control" placeholder="text" id="category-text">
                     </div>
-                    <small class="form-text text-muted">Include only this category.</small>
+                    <small class="form-text text-muted">Include only this category. Not case sensitive.</small>
                 </div>
                 <!-- Could category input be a type-ahead? -->
             </form>
