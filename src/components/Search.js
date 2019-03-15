@@ -1,12 +1,16 @@
-import ResultList from '.Result'
+import React from 'react'
+import './Search.css'
+import ResultList from './Result'
+import Detail from './Detail'
 
 const Search = (props) => (
     <div id="search" className="v-pane">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="search-text">Search</span>
+        <div className="input-group-prepend">
+            <span className="input-group-text" id="search-text">Search</span>
         </div>
-        <input type="text" class="form-control" placeholder="Type phrases to match title or description" id="search-text"></input>
+        <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"></input>
         <ResultList />
+        <Detail />
     </div>
 );
 

@@ -2,3 +2,7 @@
     height: 80vh;
     overflow-y: scroll;
 }
+
+.highlight {
+    background-color: yellow;
+}
