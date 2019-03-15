@@ -19,5 +19,8 @@
         "react"
     ],
     "rules": {
+        "react/jsx-uses-vars": [
+            "error"
+        ]
     }
 }
