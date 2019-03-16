@@ -3,23 +3,26 @@
     * searchSetting: HTTP,...,Category
     - Search(searchSetting)
         * requestString
+        * listenForInput()
+        * debounce(listenForInput)
         * makeRequest(requestString,searchSetting)
             * payLoad: JsonList
-        - ResultList(payLoad)
-            * generateResultList(payLoad)
+        - ResultList(payLoad) {await makeRequest}
+            * generateResultList(payLoad) {await makeRequest}
             * showList
             - Result(showList)
                 * viewDetails(): Details
             - Details(showList)
                 * goBack()
     - Control(searchSetting)
-        * selectedTab
-        - Tabs
-            * selectTab => selectedTab
-        - TabContents(searchSetting,selectedTab)
-            * showContent(selectedTab)
+        * activeTab
+        - Tabs(onTabSelectedCB)
+            * selectTab => activeTab
+        - TabContents(searchSetting,activeTab)
+            * showContent(activeTab)
                 - TabContent
                     - Filter
+                        * requestString
                         * getCategories(requestString)
                         * updateSearchSetting(searchSetting)
                     - Setting
