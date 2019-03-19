@@ -23,3 +23,7 @@ main>* {
 header>h1 {
   text-align: center;
 }
+
+.nav-item:hover{
+  cursor: grab;
+}

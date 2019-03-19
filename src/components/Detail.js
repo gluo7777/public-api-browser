@@ -3,7 +3,7 @@ import React from 'react'
 const Detail = (props) => (
     <div className="card">
         <div className="card-header">
-            <a href="#" className="btn btn-primary">Back</a>
+            <button className="btn btn-primary">Back</button>
         </div>
         <div className="card-body">
             <h5 className="card-title">API Name</h5>

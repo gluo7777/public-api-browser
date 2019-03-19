@@ -1,11 +1,13 @@
 import './Control.css'
 import React from 'react'
+import Filter from './Filter'
 
 // Tabs
 const FILTER = 'Filter';
 const SETTING = 'Setting';
 const TabList = [FILTER, SETTING];
 
+// Control Pane that wraps around tabs and their content
 class Control extends React.Component {
     constructor(props) {
         super(props);
@@ -30,6 +32,7 @@ class Control extends React.Component {
     }
 }
 
+// Tab components
 class Tabs extends React.Component {
     constructor(props) {
         super(props);
@@ -37,15 +40,17 @@ class Tabs extends React.Component {
             selectedTab: props.tabList[0]
         };
     }
+    selectTab(name) {
+        this.props.onTabSelected(name);
+        this.setState({ selectedTab: name });
+    }
     generateTabList(list) {
-        list.map(name => {
-            <li className="nav-item">
-                <a className={`nav-link ${this.state.selectedTab === name ? 'active' : ''}`}
-                    href="#"
-                    onClick={this.props.onTabSelected(name)}
-                >{name}</a>
-            </li>
-        });
+        return list.map((name, i) => <Tab
+            key={i}
+            tabName={name}
+            selectedTab={this.state.selectedTab}
+            onSelected={() => this.selectTab(name)}
+        />);
     }
     render() {
         return (
@@ -56,6 +61,15 @@ class Tabs extends React.Component {
     }
 }
 
+const Tab = (props) => (
+    <li className="nav-item">
+        <button className={`nav-link ${props.selectedTab === props.tabName ? 'active' : ''}`}
+            onClick={() => props.onSelected(props.tabName)}
+        >{props.tabName}</button>
+    </li>
+);
+
+// Tab Contents
 const Content = (props) => {
     switch (props.activeTab) {
         case FILTER:
@@ -65,44 +79,11 @@ const Content = (props) => {
         default:
             return (
                 <div>
-                    <h3 style="color:red">Unable to display content.</h3>
+                    <h3 style={{ color: 'red' }}>Unable to display content.</h3>
                 </div>
             );
     }
 }
-
-const Filter = (props) => (
-    <form>
-        <div className="form-group">
-            <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" id="https" />
-                <label className="form-check-label" htmlFor="https">HTTPS</label>
-            </div>
-            <div className="form-check form-check-inline">
-                <input className="form-check-input" type="checkbox" id="cors" />
-                <label className="form-check-label" htmlFor="cors">CORS</label>
-            </div>
-            <small className="form-text text-muted">Filter on endpoints that are HTTPS/CORS enabled.</small>
-        </div>
-        <div className="form-group">
-            <select className="form-control custom-select">
-                <option value="" defaultValue>No Authentication</option>
-                <option value="apikey">API Key</option>
-                <option value="oauth">OAuth</option>
-            </select>
-            <small className="form-text text-muted">What type of authentication is required?</small>
-        </div>
-        <div className="form-group">
-            <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                    <span className="input-group-text" id="category-text">Category</span>
-                </div>
-                <input type="text" className="form-control" placeholder="text" id="category-text" />
-            </div>
-            <small className="form-text text-muted">Include only this category. Not case sensitive.</small>
-        </div>
-    </form>
-);
 
 const Setting = (props) => (
     <div>
