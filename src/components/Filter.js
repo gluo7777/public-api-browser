@@ -5,8 +5,9 @@ class Filter extends React.Component {
         super(props);
     }
     updateFilterValue(field, value) {
-        this.props.onFilterValueChanged({ field: value });
-        // eslint-disable-next-line no-console
+        const setting = {};
+        setting[field] = value;
+        this.props.onFiltersUpdated(setting);
         console.info(`Changing ${field} to ${value}.`)
     }
     render() {
@@ -63,8 +64,10 @@ const SelectList = (props) => (
 );
 
 function buildOptionsList(options, defaultOption = 0) {
-    const lst = options.map(option => <option value={option.value}>{option.label}</option>);
-    lst[defaultOption].selected = true;
+    const lst = options.map((option, index) => <option key={index} value={option.value}>{option.label}</option>);
+    const temp = lst[defaultOption];
+    const option = React.cloneElement(temp);
+    lst[defaultOption] = option;
     return lst;
 }
 

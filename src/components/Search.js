@@ -10,7 +10,7 @@ const Search = (props) => (
                 <span className="input-group-text" id="search-text">Enter Text</span>
             </div>
             <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"></input>
-            <button type="button" class="btn btn-primary">Search</button>
+            <button type="button" className="btn btn-primary">Search</button>
         </div>
         <ResultList />
         <Detail />
