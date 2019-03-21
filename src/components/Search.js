@@ -12,10 +12,19 @@ class Search extends React.Component {
             results: null
         };
     }
-    async getListOfAPI() {
+    // apply filter settings
+    buildQueryUrl(host, path, filter) {
+        let url = `${host}/${path}`;
+        url += `?https=${filter.https}`;
+        if (filter.cors) url += '&cors=yes';
+        if (filter.authentication !== 'none') url += `&auth=${filter.authentication}`;
+        if (filter.category) url += `&category=${filter.category}`;
+        console.info(`Requesting against "${url}"`);
+        return url;
+    }
+    async getListOfAPI(filter) {
         // HTTP request to get json list
-        // apply filter settings
-        let res = await fetch(API_URL + '/entries')
+        let res = await fetch(this.buildQueryUrl(API_URL, 'entries', filter))
         let json = await res.json()
         this.setState({ results: json.entries });
     }
@@ -27,7 +36,7 @@ class Search extends React.Component {
                         <span className="input-group-text" id="search-text">Enter Text</span>
                     </div>
                     <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"></input>
-                    <button type="button" className="btn btn-primary" onClick={() => this.getListOfAPI()}>Search</button>
+                    <button type="button" className="btn btn-primary" onClick={() => this.getListOfAPI(this.props.search)}>Search</button>
                 </div>
                 <ResultList results={this.state.results} />
             </div>

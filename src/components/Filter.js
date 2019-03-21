@@ -3,25 +3,31 @@ import React from 'react'
 class Filter extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            https: true,
+            cors: false
+        }
     }
     updateFilterValue(field, value) {
-        const setting = {};
-        setting[field] = value;
-        this.props.onFiltersUpdated(setting);
+        this.props.onFiltersUpdated(field, value);
+        this.setState((state) => {
+            state[field] = value;
+            return state;
+        });
         console.info(`Changing ${field} to ${value}.`)
     }
     render() {
         return (
             <form>
                 <div className="form-group">
-                    <CheckBox label="HTTPS" onValueChanged={value => this.updateFilterValue('https', value)} />
-                    <CheckBox label="CORS" onValueChanged={value => this.updateFilterValue('cors', value)} />
+                    <CheckBox label="HTTPS" defaultChecked={this.state.https} onValueChanged={value => this.updateFilterValue('https', value)} />
+                    <CheckBox label="CORS" defaultChecked={this.state.cors} onValueChanged={value => this.updateFilterValue('cors', value)} />
                     <Description text="Filter on endpoints that are HTTPS/CORS enabled." />
                 </div>
                 <div className="form-group">
                     <SelectList
                         options={[
-                            { label: 'No Authentication', value: '' },
+                            { label: 'No Authentication', value: 'none' },
                             { label: 'API Key', value: 'apikey' },
                             { label: 'OAuth', value: 'oauth' }
                         ]}
@@ -48,7 +54,7 @@ class Filter extends React.Component {
 // Specific Form Components
 const CheckBox = (props) => (
     <div className="form-check form-check-inline">
-        <input className="form-check-input" type="checkbox" id={props.label} onChange={(event) => props.onValueChanged(event.target.checked)} />
+        <input className="form-check-input" checked={props.defaultChecked} type="checkbox" id={props.label} onChange={(event) => props.onValueChanged(event.target.checked)} />
         <label className="form-check-label" htmlFor={props.label}>{props.label}</label>
     </div>
 );
