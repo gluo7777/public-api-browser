@@ -5,7 +5,7 @@ const ResultList = (props) => (
     <div id="results" className="card">
         <ul className="list-group list-group-flush">
             {props.results ?
-                props.results.map((result, i) => <Result key={i} text={result['API']} />)
+                props.results.map((result, i) => <Result key={i} text={result['API']} description={result['Description']} />)
                 : null}
         </ul>
     </div>
@@ -14,7 +14,12 @@ const ResultList = (props) => (
 // <strong>API #1</strong> Cras <span className="highlight">justo</span> odio
 
 const Result = (props) => (
-    <li className="list-group-item">{props.text}</li>
+    <li className="list-group-item">
+        <div className="result h-pane">
+            <span className="title">{props.text}</span>
+            <span className="description">{props.description}</span>
+        </div>
+    </li>
 );
 
 export default ResultList;
