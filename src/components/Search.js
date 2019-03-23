@@ -9,7 +9,8 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            results: null
+            results: null,
+            searchText: ''
         };
     }
     // apply filter settings
@@ -22,11 +23,18 @@ class Search extends React.Component {
         console.info(`Requesting against "${url}"`);
         return url;
     }
-    async getListOfAPI(filter) {
+    async getListOfAPI(filter, text) {
         // HTTP request to get json list
         let res = await fetch(this.buildQueryUrl(API_URL, 'entries', filter))
         let json = await res.json()
-        this.setState({ results: json.entries });
+        // filter here
+        let resultList = this.filterResults(json.entries, text)
+        this.setState({ results: resultList });
+    }
+    filterResults(results, text) {
+        let p = new RegExp(text, 'gi');
+        return results.filter(result => (result['API'] && result['API'].match(p))
+            || (result['description'] && result['description'].match(p)));
     }
     render() {
         return (
@@ -35,8 +43,9 @@ class Search extends React.Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="search-text">Enter Text</span>
                     </div>
-                    <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"></input>
-                    <button type="button" className="btn btn-primary" onClick={() => this.getListOfAPI(this.props.search)}>Search</button>
+                    <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"
+                        onChange={event => this.setState({ searchText: event.target.value })}></input>
+                    <button type="button" className="btn btn-primary" onClick={() => this.getListOfAPI(this.props.search, this.state.searchText)}>Search</button>
                 </div>
                 <ResultList results={this.state.results} />
             </div>
