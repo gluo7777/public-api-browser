@@ -17,7 +17,7 @@ const Detail = (props) => (
                     </tr>
                     <tr>
                         <td>HTTPS</td>
-                        <td>{props.result[FIELD.HTTPS]}</td>
+                        <td>{props.result[FIELD.HTTPS] ? 'yes' : 'no'}</td>
                     </tr>
                     <tr>
                         <td>CORS</td>
@@ -25,11 +25,14 @@ const Detail = (props) => (
                     </tr>
                     <tr>
                         <td>Authentication</td>
-                        <td>{props.result[FIELD.AUTH]}</td>
+                        <td>{props.result[FIELD.AUTH] !== '' ? props.result[FIELD.AUTH] : 'None'}</td>
                     </tr>
                     <tr>
                         <td>Link</td>
-                        <td><a href={props.result[FIELD.LINK]}>{props.result[FIELD.LINK]}</a></td>
+                        <td>
+                            <a href={props.result[FIELD.LINK]} target="_blank">
+                                {props.result[FIELD.LINK]}
+                            </a></td>
                     </tr>
                 </tbody>
             </table>
