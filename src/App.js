@@ -10,7 +10,7 @@ class App extends Component {
     // should be passed down to all components under App
     this.state = {
       search: {
-        https: false,
+        https: true,
         cors: false,
         authentication: 'none',
         category: ''
@@ -21,18 +21,12 @@ class App extends Component {
     this.updateSearchFilters = this.updateSearchFilters.bind(this);
   }
 
-  updateSearchFilters(filter) {
+  updateSearchFilters(field, value) {
     this.setState((state) => {
-      return {
-        search: {
-          https: filter.https ? filter.https : state.search.https,
-          cors: filter.cors ? filter.cors : state.search.cors,
-          authentication: filter.authentication ? filter.authentication : state.search.authentication,
-          category: filter.category ? filter.category : state.search.category
-        }
-      }
+      state['search'][field] = value;
+      return state;
     });
-    // console.info(this.state);
+    console.info(this.state);
   }
 
   render() {
