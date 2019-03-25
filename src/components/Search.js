@@ -27,7 +27,6 @@ class Search extends React.Component {
         if (filter.cors) url += '&cors=yes';
         if (filter.authentication !== 'none') url += `&auth=${filter.authentication}`;
         if (filter.category) url += `&category=${filter.category}`;
-        console.info(`Requesting against "${url}"`);
         return url;
     }
     async getListOfAPI(filter, text) {
