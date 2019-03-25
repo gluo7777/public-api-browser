@@ -5,12 +5,19 @@ import Detail from './Detail'
 
 const API_URL = 'https://api.publicapis.org';
 
+const VIEW = {
+    DETAIL: 'view_detail',
+    LIST: 'view_list',
+};
+
 class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             results: null,
-            searchText: ''
+            result: null,
+            searchText: '',
+            mode: VIEW.LIST
         };
     }
     // apply filter settings
@@ -25,16 +32,17 @@ class Search extends React.Component {
     }
     async getListOfAPI(filter, text) {
         // HTTP request to get json list
-        let res = await fetch(this.buildQueryUrl(API_URL, 'entries', filter))
-        let json = await res.json()
+        let res = await fetch(this.buildQueryUrl(API_URL, 'entries', filter));
+        let json = await res.json();
         // filter here
-        let resultList = this.filterResults(json.entries, text)
+        let resultList = this.filterResults(json.entries, text);
         this.setState({ results: resultList });
     }
     filterResults(results, text) {
         let p = new RegExp(text, 'gi');
         return results.filter(result => (result['API'] && result['API'].match(p))
-            || (result['description'] && result['description'].match(p)));
+            || (result['Description'] && result['Description'].match(p))
+            || (result['Category'] && result['Category'].match(p)));
     }
     render() {
         return (
@@ -47,7 +55,12 @@ class Search extends React.Component {
                         onChange={event => this.setState({ searchText: event.target.value })}></input>
                     <button type="button" className="btn btn-primary" onClick={() => this.getListOfAPI(this.props.search, this.state.searchText)}>Search</button>
                 </div>
-                <ResultList results={this.state.results} />
+                {
+                    // show details or list
+                    this.state.mode === VIEW.LIST ?
+                        <ResultList results={this.state.results} onRowClicked={result => this.setState({ result: result, mode: VIEW.DETAIL })} />
+                        : <Detail result={this.state.result} onBackBtnClicked={() => this.setState({ mode: VIEW.LIST, result: null })} />
+                }
             </div>
         );
     }

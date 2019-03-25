@@ -8,7 +8,7 @@
 }
 
 .result{
-
+    cursor: grab;
 }
 
 .result>span{
@@ -25,4 +25,8 @@
 
 .result>.description{
     font-style: italic;
+}
+
+.result>.category{
+    color: blue;
 }
