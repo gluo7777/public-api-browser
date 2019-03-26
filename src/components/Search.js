@@ -10,6 +10,9 @@ const VIEW = {
     LIST: 'view_list',
 };
 
+// type-ahead delay
+const DELAY = 1000;
+
 class Search extends React.Component {
     constructor(props) {
         super(props);
@@ -17,8 +20,10 @@ class Search extends React.Component {
             results: null,
             result: null,
             searchText: '',
-            mode: VIEW.LIST
+            mode: VIEW.LIST,
+            timeout: null
         };
+        this.populateList = this.populateList.bind(this);
     }
     // apply filter settings
     buildQueryUrl(host, path, filter) {
@@ -37,6 +42,16 @@ class Search extends React.Component {
         let resultList = this.filterResults(json.entries, text);
         this.setState({ results: resultList });
     }
+    // applies debouncing to REST calls
+    populateList(event) {
+        if (this.state.timeout) clearTimeout(this.state.timeout);
+        const text = event.target.value;
+        this.setState({
+            timeout: setTimeout(() => {
+                this.getListOfAPI(this.props.search, text)
+            }, DELAY)
+        });
+    }
     filterResults(results, text) {
         let p = new RegExp(text, 'gi');
         return results.filter(result => (result['API'] && result['API'].match(p))
@@ -51,8 +66,7 @@ class Search extends React.Component {
                         <span className="input-group-text" id="search-text">Enter Text</span>
                     </div>
                     <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"
-                        onChange={event => this.setState({ searchText: event.target.value })}></input>
-                    <button type="button" className="btn btn-primary" onClick={() => this.getListOfAPI(this.props.search, this.state.searchText)}>Search</button>
+                        onKeyUp={this.populateList}></input>
                 </div>
                 {
                     // show details or list

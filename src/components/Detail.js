@@ -32,7 +32,8 @@ const Detail = (props) => (
                     <tr>
                         <td>Link</td>
                         <td>
-                            <a href={props.result[FIELD.LINK]} target="_blank">
+                            {/* See: https://mathiasbynens.github.io/rel-noopener} */}
+                            <a href={props.result[FIELD.LINK]} target="_blank" rel="noopener noreferrer">
                                 {props.result[FIELD.LINK]}
                             </a></td>
                     </tr>

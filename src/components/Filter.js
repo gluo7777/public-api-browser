@@ -14,7 +14,6 @@ class Filter extends React.Component {
             state[field] = value;
             return state;
         });
-        console.info(`Changing ${field} to ${value}.`)
     }
     render() {
         return (
