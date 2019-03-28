@@ -30,3 +30,8 @@ header>h1 {
 
 /* Removes blue outline from button links */
 button:focus {outline:0;}
+
+/* Preserve white spaces in span tags */
+span{
+  white-space: pre;
+}

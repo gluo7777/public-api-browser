@@ -19,7 +19,6 @@ class Control extends React.Component {
 
     setActiveTab(tab) {
         this.setState({ activeTab: tab });
-        console.info(`Selecting tab ${tab}`);
     }
 
     render() {

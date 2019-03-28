@@ -11,7 +11,7 @@
     cursor: grab;
 }
 
-.result>span{
+.result>p{
     display: inline-flex;
     align-items: center;
     justify-content: center;

@@ -38,9 +38,7 @@ class Search extends React.Component {
         // HTTP request to get json list
         let res = await fetch(this.buildQueryUrl(API_URL, 'entries', filter));
         let json = await res.json();
-        // filter here
-        let resultList = this.filterResults(json.entries, text);
-        this.setState({ results: resultList });
+        this.setState({ results: json.entries, searchText: text });
     }
     // applies debouncing to REST calls
     populateList(event) {
@@ -52,12 +50,7 @@ class Search extends React.Component {
             }, DELAY)
         });
     }
-    filterResults(results, text) {
-        let p = new RegExp(text, 'gi');
-        return results.filter(result => (result['API'] && result['API'].match(p))
-            || (result['Description'] && result['Description'].match(p))
-            || (result['Category'] && result['Category'].match(p)));
-    }
+
     render() {
         return (
             <div id="search" className="v-pane">
@@ -71,7 +64,7 @@ class Search extends React.Component {
                 {
                     // show details or list
                     this.state.mode === VIEW.LIST ?
-                        <ResultList results={this.state.results} onRowClicked={result => this.setState({ result: result, mode: VIEW.DETAIL })} />
+                        <ResultList payload={this.state.results} search={this.state.searchText} onRowClicked={result => this.setState({ result: result, mode: VIEW.DETAIL })} />
                         : <Detail result={this.state.result} onBackBtnClicked={() => this.setState({ mode: VIEW.LIST, result: null })} />
                 }
             </div>
