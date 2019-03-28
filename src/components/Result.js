@@ -8,10 +8,18 @@ const ResultList = (props) => (
     <div id="results" className="card">
         <ul className="list-group list-group-flush">
             {props.payload ? props.payload.filter(result => sectionsContainText(result, props.search))
+                /* Sort by ascending API names */
+                .sort((r1, r2) => compareStrings(r1[FIELD.NAME], r2[FIELD.NAME]))
                 .map((result, i) => buildResultItem(result, i, props.search, props.onRowClicked)) : null}
         </ul>
     </div>
 );
+
+function compareStrings(s1, s2) {
+    if (s1 < s2) return -1;
+    else if (s1 > s2) return 1;
+    else return 0;
+}
 
 function sectionsContainText(result, search) {
     let matcher = new RegExp(search, 'gi');
