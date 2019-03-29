@@ -1,5 +1,6 @@
 // Specific Content Components
 import React from 'react'
+import debounce from '../api/ComponentUtil';
 class Filter extends React.Component {
     constructor(props) {
         super(props);
@@ -26,12 +27,12 @@ class Filter extends React.Component {
                 <div className="form-group">
                     <SelectList
                         options={[
-                            { label: 'No Authentication', value: 'none' },
+                            { label: 'Any Authentication', value: 'none' },
                             { label: 'API Key', value: 'apikey' },
                             { label: 'OAuth', value: 'oauth' }
                         ]}
                         defaultIndex={0}
-                        onValueChanged={(value => this.updateFilterValue('authentication', value))}
+                        onValueChanged={value => this.updateFilterValue('authentication', value)}
                     />
                     <Description text="What type of authentication is required?" />
                 </div>
@@ -41,7 +42,11 @@ class Filter extends React.Component {
                             <span className="input-group-text" id="category-text">Category</span>
                         </div>
                         <input type="text" className="form-control" placeholder="text" id="category-text"
-                            onChange={event => this.updateFilterValue('category', event.target.value)} />
+                            onChange={event => {
+                                let value = event.target.value;
+                                let fn = this.updateFilterValue('category', value);
+                                debounce(this, fn);
+                            }} />
                     </div>
                     <Description text="Include only this category. Not case sensitive." />
                 </div>
@@ -61,7 +66,7 @@ const CheckBox = (props) => (
 const SelectList = (props) => (
     <select className="form-control custom-select" onChange={event => {
         const list = event.target;
-        const selected = list.selectedOptions[0]; // can only select up to 1 option
+        const selected = list.selectedOptions[0].value; // can only select up to 1 option
         props.onValueChanged(selected);
     }}>
         {buildOptionsList(props.options, props.defaultIndex)}
