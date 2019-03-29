@@ -23,10 +23,9 @@ class App extends Component {
 
   updateSearchFilters(field, value) {
     this.setState((state) => {
-      state['search'][field] = value;
+      state.search[field] = value;
       return state;
     });
-    console.info(this.state);
   }
 
   render() {

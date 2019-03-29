@@ -2,6 +2,7 @@ import React from 'react'
 import './Search.css'
 import ResultList from './Result'
 import Detail from './Detail'
+import debounce from '../api/ComponentUtil'
 
 const API_URL = 'https://api.publicapis.org';
 
@@ -11,7 +12,6 @@ const VIEW = {
 };
 
 // type-ahead delay
-const DELAY = 1000;
 
 class Search extends React.Component {
     constructor(props) {
@@ -24,6 +24,14 @@ class Search extends React.Component {
             timeout: null
         };
         this.populateList = this.populateList.bind(this);
+    }
+    // load result list immediately
+    componentDidMount() {
+        this.populateList(this.props.search, '');
+    }
+    // updates result list when filter settings have changed
+    componentWillReceiveProps({ search }) {
+        this.populateList(search, this.state.searchText);
     }
     // apply filter settings
     buildQueryUrl(host, path, filter) {
@@ -41,14 +49,8 @@ class Search extends React.Component {
         this.setState({ results: json.entries, searchText: text });
     }
     // applies debouncing to REST calls
-    populateList(event) {
-        if (this.state.timeout) clearTimeout(this.state.timeout);
-        const text = event.target.value;
-        this.setState({
-            timeout: setTimeout(() => {
-                this.getListOfAPI(this.props.search, text)
-            }, DELAY)
-        });
+    populateList(filter, text) {
+        debounce(this, () => this.getListOfAPI(filter, text))
     }
 
     render() {
@@ -59,7 +61,7 @@ class Search extends React.Component {
                         <span className="input-group-text" id="search-text">Enter Text</span>
                     </div>
                     <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"
-                        onKeyUp={this.populateList}></input>
+                        onKeyUp={event => this.populateList(this.props.search, event.target.value)}></input>
                 </div>
                 {
                     // show details or list
