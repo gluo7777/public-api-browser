@@ -1,3 +1,15 @@
+# Public API Browser
+Deployed to [Github pages](https://gluo7777.github.io/public-api-browser).
+
+## Development
+- `npm install`
+- `npm start`
+- install chrome debugger plugin
+
+## Deployment
+- `npm deploy`
+
+## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
