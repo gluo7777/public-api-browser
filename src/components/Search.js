@@ -27,11 +27,11 @@ class Search extends React.Component {
     }
     // load result list immediately
     componentDidMount() {
-        this.populateList(this.props.search, '');
+        this.populateList(this.props.filter, '');
     }
     // updates result list when filter settings have changed
-    componentWillReceiveProps({ search }) {
-        this.populateList(search, this.state.searchText);
+    componentWillReceiveProps({ filter }) {
+        this.populateList(filter, this.state.searchText);
     }
     // apply filter settings
     buildQueryUrl(host, path, filter) {
@@ -61,7 +61,7 @@ class Search extends React.Component {
                         <span className="input-group-text" id="search-text">Enter Text</span>
                     </div>
                     <input type="text" className="form-control" placeholder="Type phrases to match title or description" id="search-text"
-                        onKeyUp={event => this.populateList(this.props.search, event.target.value)}></input>
+                        onKeyUp={event => this.populateList(this.props.filter, event.target.value)}></input>
                 </div>
                 {
                     // show details or list
