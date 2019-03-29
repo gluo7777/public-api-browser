@@ -9,7 +9,7 @@ class App extends Component {
     // global state
     // should be passed down to all components under App
     this.state = {
-      search: {
+      filter: {
         https: true,
         cors: false,
         authentication: 'none',
@@ -23,7 +23,7 @@ class App extends Component {
 
   updateSearchFilters(field, value) {
     this.setState((state) => {
-      state.search[field] = value;
+      state.filter[field] = value;
       return state;
     });
   }
@@ -31,8 +31,8 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Search search={this.state.search} />
-        <Control onFiltersUpdated={this.updateSearchFilters} />
+        <Search filter={this.state.filter} />
+        <Control onFiltersUpdated={this.updateSearchFilters} global={this.state} />
       </React.Fragment>
     );
   }

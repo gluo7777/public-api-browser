@@ -25,7 +25,7 @@ class Control extends React.Component {
         return (
             <div id="control" className="v-pane">
                 <Tabs tabList={TabList} onTabSelected={this.setActiveTab} />
-                <Content activeTab={this.state.activeTab} onFiltersUpdated={this.props.onFiltersUpdated} />
+                <Content activeTab={this.state.activeTab} onFiltersUpdated={this.props.onFiltersUpdated} global={this.props.global} />
             </div>
         );
     }
@@ -72,9 +72,9 @@ const Tab = (props) => (
 const Content = (props) => {
     switch (props.activeTab) {
         case FILTER:
-            return <Filter onFiltersUpdated={props.onFiltersUpdated} />;
+            return <Filter onFiltersUpdated={props.onFiltersUpdated} filter={props.global.filter} />;
         case SETTING:
-            return <Setting />;
+            return <Setting onSettingsUpdated={props.onSettingsUpdated} setting={props.global.setting} />;
         default:
             return (
                 <div>
@@ -84,7 +84,7 @@ const Content = (props) => {
     }
 }
 
-const Setting = (props) => (
+const Setting = () => (
     <div>
         <p>Setting under construction.</p>
     </div>
