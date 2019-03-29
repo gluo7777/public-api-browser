@@ -19,14 +19,13 @@ class Control extends React.Component {
 
     setActiveTab(tab) {
         this.setState({ activeTab: tab });
-        console.info(`Selecting tab ${tab}`);
     }
 
     render() {
         return (
             <div id="control" className="v-pane">
                 <Tabs tabList={TabList} onTabSelected={this.setActiveTab} />
-                <Content activeTab={this.state.activeTab} />
+                <Content activeTab={this.state.activeTab} onFiltersUpdated={this.props.onFiltersUpdated} />
             </div>
         );
     }
@@ -73,7 +72,7 @@ const Tab = (props) => (
 const Content = (props) => {
     switch (props.activeTab) {
         case FILTER:
-            return <Filter />;
+            return <Filter onFiltersUpdated={props.onFiltersUpdated} />;
         case SETTING:
             return <Setting />;
         default:

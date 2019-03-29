@@ -24,6 +24,14 @@ header>h1 {
   text-align: center;
 }
 
-.nav-item:hover{
+.nav-link:hover{
   cursor: grab;
+}
+
+/* Removes blue outline from button links */
+button:focus {outline:0;}
+
+/* Preserve white spaces in span tags */
+span{
+  white-space: pre;
 }

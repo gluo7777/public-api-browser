@@ -20,8 +20,8 @@
             * selectTab => activeTab
         - TabContents(searchSetting,activeTab)
             * showContent(activeTab)
-                - TabContent
-                    - Filter
+                - TabContent(searchSetting)
+                    - Filter(searchSetting)
                         * requestString
                         * getCategories(requestString)
                         * updateSearchSetting(searchSetting)
