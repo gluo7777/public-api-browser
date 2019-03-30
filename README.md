@@ -10,8 +10,16 @@ Deployed to [Github pages](https://gluo7777.github.io/public-api-browser).
 - `npm run deploy`
 
 ## Testing
-[Tutorial](https://jestjs.io/docs/en/tutorial-react)
-- `npm install --save-dev react-test-rendere`
+- [Snapshot Testing](https://jestjs.io/docs/en/tutorial-react)
+    - `npm install --save-dev react-test-renderer`
+- [Unit Testing and Mocking](https://reactjs.org/docs/test-utils.html)
+    - `https://stackoverflow.com/questions/50886894/testing-inline-callback-functions-in-react-using-jest`
+
+## CI
+- [Set up](https://medium.com/quick-code/from-zero-to-deployed-with-react-travisci-and-surge-9be99350cf8b)
+
+### Deployment
+https://docs.travis-ci.com/user/deployment/pages/
 
 ## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

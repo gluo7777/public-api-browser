@@ -6,3 +6,14 @@ cache:
     - node_modules
 script:
   - npm test
+  - npm run build
+# Guide: https://docs.travis-ci.com/user/deployment/pages/
+deploy:
+  local_dir: build
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  target_branch: gh_pages
+  on:
+    branch: master
