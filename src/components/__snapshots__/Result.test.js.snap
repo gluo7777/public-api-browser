@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result renders columns correctly 1`] = `
+<li
+  className="list-group-item"
+>
+  <div
+    className="result h-pane"
+    onClick={[Function]}
+  >
+    <p>
+      <span>
+        column1
+      </span>
+    </p>
+    <p>
+      <span>
+        column2
+      </span>
+    </p>
+  </div>
+</li>
+`;
