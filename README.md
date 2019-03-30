@@ -9,6 +9,10 @@ Deployed to [Github pages](https://gluo7777.github.io/public-api-browser).
 ## Deployment
 - `npm run deploy`
 
+## Testing
+[Tutorial](https://jestjs.io/docs/en/tutorial-react)
+- `npm install --save-dev react-test-rendere`
+
 ## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
