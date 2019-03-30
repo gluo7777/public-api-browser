@@ -1,6 +1,6 @@
 import React from 'react'
 import './Search.css'
-import ResultList from './Result'
+import { ResultList } from './Result'
 import Detail from './Detail'
 import debounce from '../api/ComponentUtil'
 

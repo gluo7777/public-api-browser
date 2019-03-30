@@ -77,4 +77,4 @@ const Result = (props) => (
     </li>
 );
 
-export default ResultList;
+export { Result, ResultList };
